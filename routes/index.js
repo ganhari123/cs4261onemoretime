@@ -6,4 +6,8 @@ router.get('/', function(req, res) {
   res.render('index');
 });
 
+router.get('/code', function(req, res){
+	res.send('Hello code');
+});
+
 module.exports = router;
