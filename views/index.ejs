@@ -3,6 +3,7 @@
 <head>
   <title>ShopGO</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif|Pacifico" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
@@ -11,8 +12,38 @@
 
 </head>
 
-<body id="bodyMain">
-
+<body id="bodyMain" style="background-color: rgb(255,228,222)">
+    <div id="appbar">
+        <div id="top-container">
+            <img id="top-icon" src="img/user.svg">
+            <form method="GET" action="/getShoppingList">
+<!--                <img id="top-icon" src="img/cart.svg">-->
+                <input id="top-icon" type="submit" value="View Shopping Cart">
+            </form>
+        </div>
+        <div id="tabBtnContainer">
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/recipe.svg">
+                <label id="tab-label">Recipes</label>
+            </div>
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/shop.svg">
+                <label id="tab-label">Aisle Finder</label>
+            </div>
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/scan.svg">
+                <label id="tab-label">Scan</label>
+            </div>
+        </div>
+    </div>
+    <div style="top:30%; position:fixed; left: 25%">
+        <h1 style="margin-botton:2%">Search for Recipes</h1>
+        <form method="GET" action="/getResults">
+          <input type="text" placeholder="item search" required>
+          <input type="submit" value="Search Item">
+        </form>
+    </div>
+<!--
   <h1>Welcome Ganapathy</h1><br>
 
   <form method="GET" action="/getShoppingList">
@@ -23,6 +54,7 @@
       <input type="text" placeholder="item search" required>
       <input type="submit" value="Search Item">
   </form>
+-->
 
   
 

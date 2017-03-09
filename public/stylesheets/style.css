@@ -4,12 +4,13 @@ html {
 
 html, body {
 	background-size: cover;
-	background: radial-gradient(rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 1.0) 50%);
+/*	background: radial-gradient(rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 1.0) 50%);*/
 }
 
 body {
     height: 100%;
     margin: 0;
+    background-color: rgb(255,228,222);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -34,4 +35,56 @@ body {
 	width: 400px;
 	font-size: 40px;
 	height: 90px;
+}
+
+#appbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 25%;
+    width: 100%;
+    background-color: #6f6d74;
+    z-index: 1;
+    display: table;
+    box-shadow: 4px 4px 4px 4px #f9caca;
+}
+
+#icon {
+    z-index: 2;
+    display: block;
+    margin:auto;
+/*    color:aliceblue;*/
+}
+
+#tab-label {
+    z-index: 3;
+    display: block;
+    font-size: 16px;
+    color: #e7e4e6;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Noto Serif', serif;
+}
+
+#tabBtn {
+    width: 33%;
+    border: 2px solid white;
+    padding: 2% 0;
+}
+#tabBtnContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+}
+
+#top-icon {
+    margin: 1%;
+    float: right;
+}
+
+#top-container {
+    position: absolute;
+    width: 100%;
+    height:25%;
 }

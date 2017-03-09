@@ -12,25 +12,53 @@
 
 </head>
 
-<body id="bodyMain">
+<body id="bodyMain" style="background-color: rgb(255,228,222)">
+    <div id="appbar">
+        <div id="top-container">
+            <img id="top-icon" src="img/user.svg">
+            <form method="GET" action="/getShoppingList">
+<!--                <img id="top-icon" src="img/cart.svg">-->
+                <input id="top-icon" type="submit" value="View Shopping Cart">
+            </form>
+        </div>
+        <div id="tabBtnContainer">
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/recipe.svg">
+                <label id="tab-label">Recipes</label>
+            </div>
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/shop.svg">
+                <label id="tab-label">Aisle Finder</label>
+            </div>
+            <div id="tabBtn" style="float:left">
+                <img id="icon" src="img/scan.svg">
+                <label id="tab-label">Scan</label>
+            </div>
+        </div>
+    </div>
+    <div style="top:30%; position:fixed; width:100%">
+          <h1 style="text-align: center; margin-bottom: 2%;">Grocery List</h1>
+        <div style="position:relative; left: 10%; margin-bottom: 1%">
+          <form method="POST" action="/addItem">
+                <input required name="ItemName" type="text" placeholder="Item Name">
+                <input required name="Quantity" placeholder="Quantity" type="number">
+                <input type="submit" value="Add to list">
+          </form>
+        </div>
+        <div style="position:relative; left: 10%;">
+          <ul>
+            <% for(var i=0; i < shoppingList.length; i++) { %>
 
-  <h1>Grocery List</h1><br>
-  <form method="POST" action="/addItem">
-            <input required name="ItemName" type="text" placeholder="itemName">
-            <input required name="Quantity" type="number">
-            <input type="submit" value="Add to list">
-  </form>
-  <ul>
-    <% for(var i=0; i < shoppingList.length; i++) { %>
-     
-       <li><%= shoppingList[i].ItemName %>
+               <li><%= shoppingList[i].ItemName %>
 
-        <form method="POST" action="/deleteItem/<%= shoppingList[i].ItemName %>">
-            <input type="submit" value="Delete">
-        </form>
-       </li>
-    <% } %>
-  </ul>
+                <form method="POST" action="/deleteItem/<%= shoppingList[i].ItemName %>">
+                    <input type="submit" value="Delete">
+                </form>
+               </li>
+            <% } %>
+          </ul>
+        </div>
+    </div>
 
 </body>
 
