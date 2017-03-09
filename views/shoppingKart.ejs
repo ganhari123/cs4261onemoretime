@@ -8,23 +8,29 @@
   <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/js/main.js"></script>
 
 </head>
 
 <body id="bodyMain">
 
-  <h1>Welcome Ganapathy</h1><br>
-
-  <form method="GET" action="/getShoppingList">
-      <input type="submit" value="View Shopping Cart">
+  <h1>Grocery List</h1><br>
+  <form method="POST" action="/addItem">
+            <input required name="ItemName" type="text" placeholder="itemName">
+            <input required name="Quantity" type="number">
+            <input type="submit" value="Add to list">
   </form>
+  <ul>
+    <% for(var i=0; i < shoppingList.length; i++) { %>
+     
+       <li><%= shoppingList[i].ItemName %>
 
-  <form method="GET" action="/getResults">
-      <input type="text" placeholder="item search" required>
-      <input type="submit" value="Search Item">
-  </form>
-
-  
+        <form method="POST" action="/deleteItem/<%= shoppingList[i].ItemName %>">
+            <input type="submit" value="Delete">
+        </form>
+       </li>
+    <% } %>
+  </ul>
 
 </body>
 
