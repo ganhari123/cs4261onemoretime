@@ -4,7 +4,8 @@ html {
 
 html, body {
 	background-size: cover;
-/*	background: radial-gradient(rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 1.0) 50%);*/
+	background: radial-gradient(rgba(255,228,222,1) 0%, rgba(255,228,222,1) 50%);
+/*    background-color: #6f6d74;*/
 }
 
 body {
@@ -13,6 +14,18 @@ body {
     background-color: rgb(255,228,222);
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+#logo {
+/*    display: block;*/
+    position: fixed;
+    margin: auto;
+    top: 25%;
+  	left: 50%;
+    transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+    z-index: 1;
+    font-family: 'Pacifico', cursive;
+/*    margin-bottom: 50%;*/
 }
 
 #ComingSoon {
@@ -56,26 +69,23 @@ body {
 /*    color:aliceblue;*/
 }
 
-#tab-label {
-    z-index: 3;
-    display: block;
+#tabLabel {
+    margin: auto;
     font-size: 16px;
     color: #e7e4e6;
-    text-align: center;
-    margin-top: 10px;
+    margin-top: 0.5%;
     font-family: 'Noto Serif', serif;
 }
 
 #tabBtn {
-    width: 33%;
-    border: 2px solid white;
-    padding: 2% 0;
+    background: #6f6d74;
 }
 #tabBtnContainer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 75%;
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+    height: 20%;
+/*    background: black;*/
 }
 
 #top-icon {
@@ -84,7 +94,47 @@ body {
 }
 
 #top-container {
+/*
     position: absolute;
     width: 100%;
-    height:25%;
+*/
+    height:8%;
+}
+
+#logForm {
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	background-color: #6f6d74;
+  /* bring your own prefixes */
+  	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	border-radius: 10px;
+	width: 300px;
+    box-shadow: 4px 4px 4px 4px #f9caca;
+    margin-top: 5%;
+    display: block;
+    z-index: 2;
+}
+
+#text {
+    font-family: 'Noto Serif', serif;
+    color: #e7e4e6;
+    margin-bottom: 5%;
+}
+
+#input {
+    width: 75%;
+    margin: auto;
+/*    padding: 2%;*/
+    margin-bottom: 5%;
+}
+
+#signinBtn {
+    width: 75%;
+    margin: auto;
+    margin-bottom: 8%;
+    font-family: 'Noto Serif', serif;
+    color: black;
 }
