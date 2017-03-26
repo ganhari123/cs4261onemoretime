@@ -1,0 +1,18 @@
+
+<img id="logo" src="../../assets/img/Logo.svg">
+<form id="regForm" action="/register" method="post">
+    <p id="header">Register</p>
+    <div>
+        <label id="label">Username:</label>
+        <input id="input" type="text" name="username">
+    </div>
+    <div>
+        <label id="label">Password:</label>
+        <input id="input" type="password" name="password">
+    </div>
+    <label id="label">Confirm Password:</label>
+    <input id="input" type="password" name="confPass">
+    <input type="submit" value="register">
+    <a href="/" id="already">Already have an account? Login here</a>
+    <p>{{registrationStatus}}</p>
+</form>
