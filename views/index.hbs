@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en-US">
 <head>
   <title>{{ title }}</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
@@ -12,37 +10,26 @@
 
 </head>
 
+<!--
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
-    <div id="appbar">
         <div id="top-container">
             <a href="/logout"><img id="top-icon" src="img/user.svg"></a>
             <form method="GET" action="/getShoppingList">
-<!--                <img id="top-icon" src="img/cart.svg">-->
+                <img id="top-icon" src="img/cart.svg">
                 <input id="top-icon" type="submit" value="View Shopping Cart">
             </form>
         </div>
-        <div id="tabBtnContainer">
-            <div id="tabBtn" style="float:left">
-                <a href="/">
-                  <img id="icon" src="img/recipe.svg" >
-                </a>
-                
-                <label id="tab-label">Recipes</label>
-            </div>
-            <div id="tabBtn" style="float:left">
-                <img id="icon" src="img/shop.svg">
-                <label id="tab-label">Aisle Finder</label>
-            </div>
-            <div id="tabBtn" style="float:left">
-                <img id="icon" src="img/scan.svg">
-                <label id="tab-label">Scan</label>
-            </div>
-        </div>
-    </div>
+-->
+<div id="top-container" class="btn-group btn-group-justified" role="group">
+   <a style="background: #6f6d74" href="" class="btn btn-default" role="button"></a>
+</div>
+<div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
+   <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
+    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/shop.svg"><br> <p id="tabLabel">Aisle Finder</p></a>
+    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/scan.svg"><br> <p id="tabLabel">Scan</p></a>
+</div>
     {{{body}}}
 
   
 
-</body>
-
-</html>
+<!--</body>-->
