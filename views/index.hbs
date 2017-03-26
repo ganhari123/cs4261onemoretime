@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>ShopGO</title>
+  <title>{{ title }}</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif|Pacifico" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="/js/main.js"></script>
 
 </head>
 
@@ -26,6 +26,7 @@
                 <a href="/">
                   <img id="icon" src="img/recipe.svg" >
                 </a>
+                
                 <label id="tab-label">Recipes</label>
             </div>
             <div id="tabBtn" style="float:left">
@@ -38,29 +39,9 @@
             </div>
         </div>
     </div>
-    <div style="top:30%; position:fixed; width:100%">
-          <h1 style="text-align: center; margin-bottom: 2%;">Grocery List</h1>
-        <div style="position:relative; left: 10%; margin-bottom: 1%">
-          <form method="POST" action="/addItem">
-                <input required name="ItemName" type="text" placeholder="Item Name">
-                <input required name="Quantity" placeholder="Quantity" type="number">
-                <input type="submit" value="Add to list">
-          </form>
-        </div>
-        <div style="position:relative; left: 10%;">
-          <ul>
-            <% for(var i=0; i < shoppingList.length; i++) { %>
+    {{{body}}}
 
-               <li><%= shoppingList[i].ItemName %>
-
-                <form method="POST" action="/deleteItem/<%= shoppingList[i].ItemName %>">
-                    <input type="submit" value="Delete">
-                </form>
-               </li>
-            <% } %>
-          </ul>
-        </div>
-    </div>
+  
 
 </body>
 

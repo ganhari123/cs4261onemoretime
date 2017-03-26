@@ -7,7 +7,7 @@ var mysql = require("mysql");
 var con = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
   user: "b2fcba8e2a2458",
-  password: "3e95e7215b251ef",
+  password: "aceb39dabff4f8c",
   database: "heroku_486681e5e61db3b"
 });
 
@@ -33,7 +33,7 @@ setInterval(function () {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index');
+  res.render('login', {layout: 'loginRegister', title: 'baba'});
 });
 
 router.get('/getShoppingList', function(req, res){
@@ -43,6 +43,7 @@ router.get('/getShoppingList', function(req, res){
 		} else {
 			console.log(rows);
 			res.render('shoppingKart', {
+				title: 'list',
 				shoppingList: rows
 			});
 		}

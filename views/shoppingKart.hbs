@@ -1,0 +1,23 @@
+<div style="top:30%; position:fixed; width:100%">
+          <h1 style="text-align: center; margin-bottom: 2%;">Grocery List</h1>
+        <div style="position:relative; left: 10%; margin-bottom: 1%">
+          <form method="POST" action="/addItem">
+                <input required name="ItemName" type="text" placeholder="Item Name">
+                <input required name="Quantity" placeholder="Quantity" type="number">
+                <input type="submit" value="Add to list">
+          </form>
+        </div>
+        <div style="position:relative; left: 10%;">
+          <ul>
+            {{#each shoppingList}}
+
+               <li>{{this.ItemName }}
+
+                <form method="POST" action="/deleteItem/{{this.ItemName }}">
+                    <input type="submit" value="Delete">
+                </form>
+               </li>
+            {{/each}}
+          </ul>
+        </div>
+    </div>
