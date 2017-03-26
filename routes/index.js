@@ -4,6 +4,7 @@ var mysql = require("mysql");
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
+var unirest = require('unirest');
 
 
 router.use(session({
@@ -64,6 +65,25 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
+router.get('/searchRecipe', function(req, res){
+	//console.log(req);
+	// var searchString = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=10&query=".concat(req.query.query);
+	// console.log(searchString);
+	// unirest.get(searchString)
+	// .header("X-Mashape-Key", "D3LVqy2Brxmshqi8QMHzqlfYgK92p1kkx7Jjsn7kCzkCzClGPn")
+	// .header("Accept", "application/json")
+	// .end(function (result) {
+	//   res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: result.body});
+	// });
+
+	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
+	.end(function(result){
+		//var json = JSON.stringify(eval("(" + result.body + ")"));
+		var returnObject = JSON.parse(result.body);
+		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
+	});
+});
+
 router.post('/login', passport.authenticate('local-signin', {
     successRedirect : '/home',
     failureRedirect : '/login',
@@ -98,10 +118,9 @@ router.post('/register', function(req, res){
 
 router.get('/home', isLoggedOut, function(req, res){
 	console.log(req.user);
-	res.render('recipeSearchForm', {layout: 'index', title: 'shop&go'});
+	var recipeList = [];
+	res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: recipeList});
 });
-
-
 
 router.get('/getShoppingList', function(req, res){
 	con.query('SELECT * FROM shoppingcart', function(err, rows){
@@ -115,10 +134,6 @@ router.get('/getShoppingList', function(req, res){
 			});
 		}
 	});
-});
-
-router.get('/getResults', function(req, res) {
-	res.render('searchResults');
 });
 
 router.post('/deleteItem/:item', function(req, res){
