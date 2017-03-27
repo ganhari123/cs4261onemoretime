@@ -99,19 +99,9 @@ router.post('/register', function(req, res){
 
 
 router.get('/searchRecipe', isLoggedOut,  function(req, res){
-	//console.log(req);
-	// var searchString = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=10&query=".concat(req.query.query);
-	// console.log(searchString);
-	// unirest.get(searchString)
-	// .header("X-Mashape-Key", "D3LVqy2Brxmshqi8QMHzqlfYgK92p1kkx7Jjsn7kCzkCzClGPn")
-	// .header("Accept", "application/json")
-	// .end(function (result) {
-	//   res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: result.body});
-	// });
 
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
 	.end(function(result){
-		//var json = JSON.stringify(eval("(" + result.body + ")"));
 		var returnObject = JSON.parse(result.body);
 		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
 	});
