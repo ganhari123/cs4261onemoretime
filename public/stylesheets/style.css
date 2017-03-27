@@ -101,6 +101,7 @@ body {
     height:8%;
 }
 
+
 #logForm {
 	position: fixed;
   	top: 50%;
@@ -165,4 +166,8 @@ body {
 
 .text {
     font-family: 'Noto Serif', serif;
+}
+
+.form-margin {
+    margin: 5px;
 }
