@@ -103,7 +103,16 @@ router.get('/searchRecipe', isLoggedOut,  function(req, res){
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
-		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
+		console.log(returnObject);
+		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject});
+	});
+});
+
+router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
+	unirest.get('http://food2fork.com/api/get?key=125aec03ba4a0ffe5222a72a9783b3b6&rId='.concat(req.params.id))
+	.end(function(result){
+		var returnObject = JSON.parse(result.body);
+		res.render('recipeView', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
 	});
 });
 
