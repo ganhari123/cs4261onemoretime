@@ -65,7 +65,7 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
-router.get('/searchRecipe', function(req, res){
+router.get('/searchRecipe', isLoggedOut,  function(req, res){
 	//console.log(req);
 	// var searchString = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=10&query=".concat(req.query.query);
 	// console.log(searchString);
@@ -85,7 +85,7 @@ router.get('/searchRecipe', function(req, res){
 });
 
 router.post('/login', passport.authenticate('local-signin', {
-    successRedirect : '/home',
+    successRedirect : '/searchRecipe',
     failureRedirect : '/login',
     failureFlash    : true
 }));
@@ -114,12 +114,6 @@ router.post('/register', function(req, res){
 	} else {
 		res.render('register', {layout: 'loginRegister', title: 'shop&go', registrationStatus: "Passwords dont match"});
 	}
-});
-
-router.get('/home', isLoggedOut, function(req, res){
-	console.log(req.user);
-	var recipeList = [];
-	res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: recipeList});
 });
 
 router.get('/getShoppingList', function(req, res){
@@ -160,7 +154,7 @@ router.post('/addItem', function(req, res){
 
 function isLoggedIn(req, res, next) {
 	if (req.user) {
-		res.redirect('/home');
+		res.redirect('/searchRecipe');
 	} else {
 		next();
 	}
