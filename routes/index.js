@@ -151,12 +151,16 @@ router.get('/profile', isLoggedOut,  function(req, res){
 		} else {
 			var storeAllerg = {layout: 'index', title:'shop&go', username: req.user.username, nut: false, veg: false, lactose: false, vegan: false, celiac: false, other: ''};
 			var rowFromTable = JSON.parse(rows[0].dietrest);
-			var i = 0;
-			for (i = 0; i < rowFromTable.diet.length; i++) {
-				storeAllerg[rowFromTable.diet[i]] = true;
+			if (rowFromTable !== null) {
+				var i = 0;
+				for (i = 0; i < rowFromTable.diet.length; i++) {
+					storeAllerg[rowFromTable.diet[i]] = true;
+				}
+				storeAllerg['other'] = rowFromTable.other;
+				res.render('profile', storeAllerg);
+			} else {
+				res.render('profile', storeAllerg);
 			}
-			storeAllerg['other'] = rowFromTable.other;
-			res.render('profile', storeAllerg);
 		}
 	});
 	
