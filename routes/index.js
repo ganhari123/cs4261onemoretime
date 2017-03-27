@@ -65,25 +65,6 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
-router.get('/searchRecipe', isLoggedOut,  function(req, res){
-	//console.log(req);
-	// var searchString = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=10&query=".concat(req.query.query);
-	// console.log(searchString);
-	// unirest.get(searchString)
-	// .header("X-Mashape-Key", "D3LVqy2Brxmshqi8QMHzqlfYgK92p1kkx7Jjsn7kCzkCzClGPn")
-	// .header("Accept", "application/json")
-	// .end(function (result) {
-	//   res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: result.body});
-	// });
-
-	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
-	.end(function(result){
-		//var json = JSON.stringify(eval("(" + result.body + ")"));
-		var returnObject = JSON.parse(result.body);
-		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
-	});
-});
-
 router.post('/login', passport.authenticate('local-signin', {
     successRedirect : '/searchRecipe',
     failureRedirect : '/login',
@@ -114,6 +95,26 @@ router.post('/register', function(req, res){
 	} else {
 		res.render('register', {layout: 'loginRegister', title: 'shop&go', registrationStatus: "Passwords dont match"});
 	}
+});
+
+
+router.get('/searchRecipe', isLoggedOut,  function(req, res){
+	//console.log(req);
+	// var searchString = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=10&query=".concat(req.query.query);
+	// console.log(searchString);
+	// unirest.get(searchString)
+	// .header("X-Mashape-Key", "D3LVqy2Brxmshqi8QMHzqlfYgK92p1kkx7Jjsn7kCzkCzClGPn")
+	// .header("Accept", "application/json")
+	// .end(function (result) {
+	//   res.render('recipeSearchForm', {layout: 'index', title: 'shop&go', recipe: result.body});
+	// });
+
+	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
+	.end(function(result){
+		//var json = JSON.stringify(eval("(" + result.body + ")"));
+		var returnObject = JSON.parse(result.body);
+		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
+	});
 });
 
 router.get('/getShoppingList', function(req, res){
@@ -148,6 +149,37 @@ router.post('/addItem', function(req, res){
 			console.log(err);
 		} else {
 			res.redirect('/getShoppingList');
+		}
+	});
+});
+
+router.get('/profile', isLoggedOut,  function(req, res){
+	
+	con.query('SELECT * FROM users where username = ?', req.user.username, function(err, rows){
+		if (err) {
+			console.log(err);
+		} else {
+			var storeAllerg = {layout: 'index', title:'shop&go', username: req.user.username, nut: false, veg: false, lactose: false, vegan: false, celiac: false, other: ''};
+			var rowFromTable = JSON.parse(rows[0].dietrest);
+			var i = 0;
+			for (i = 0; i < rowFromTable.diet.length; i++) {
+				storeAllerg[rowFromTable.diet[i]] = true;
+			}
+			storeAllerg['other'] = rowFromTable.other;
+			res.render('profile', storeAllerg);
+		}
+	});
+	
+});
+
+router.post('/dietPreferences', function(req, res){
+	console.log(req.body);
+	
+	con.query('UPDATE users SET dietrest = ? Where username = ?', [JSON.stringify(req.body), req.user.username], function(err, result){
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect('/profile');
 		}
 	});
 });
