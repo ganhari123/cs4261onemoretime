@@ -1,8 +1,12 @@
 <div>
         <h1 class="pageTitle">Search for Recipes</h1>
-        <form style="margin:0 auto; width:62%" method="get" action="/searchRecipe">
-          <input type="text" placeholder="item search" name="query" required>
-            <button style="margin: 2%" class="btn text" type="submit" value="Search Recipe">Search for Recipe</button>
+        <form style="margin:0 auto; width:75%" method="get" action="/searchRecipe">
+            <div class="input-group text">
+                <input type="text" class="form-control" placeholder="Search for items" name="query" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" value="Search Recipe">Search</button>
+                </span>
+            </div>
         </form>
         <ul class="recipe_list">
 		  {{#each recipe}}
