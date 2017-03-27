@@ -12,15 +12,15 @@
 
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
 <div id="top-container" style="background: #6f6d74"  class="btn-group btn-group-justified" role="group">
-    <div class="dropdown">
-        <a class="dropdown-toggle top-icon" type="button" data-toggle="dropdown"><img id="top-icon" src="img/user.svg"></a>
-        <ul class="dropdown-menu top-icon">
+    <div style="float:right" class="dropdown">
+        <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="img/user.svg"></a>
+        <ul class="dropdown-menu dropdown-menu-right top-icon">
             <li><a href="/profile">Profile</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
     <form method="GET" action="/getShoppingList">
-        <img style="padding-top: 1.5%" id="top-icon" src="img/cart.svg">
+        <a href="/getShoppingList"><img style="margin:3%" id="top-icon" src="img/cart.svg"></a>
     </form>
 </div>
 <div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
