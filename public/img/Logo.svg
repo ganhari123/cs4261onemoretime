@@ -15,12 +15,13 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Logo.svg"
+   sodipodi:docname="logo.svg"
    inkscape:export-filename="D:\Sara\Documents\Spring 2017\Mobile Apps\cs4261\src\assets\img\logo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
-  <defs
-     id="defs4" />
+  <defs id="defs4">
+    <style type="text/css">@import url('http://fonts.googleapis.com/css?family=Pacifico');</style>
+    </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
