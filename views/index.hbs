@@ -11,15 +11,17 @@
 </head>
 
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
-        <!-- <div id="top-container">
-            <a href="/logout"><img id="top-icon" src="img/user.svg"></a>
-            <form method="GET" action="/getShoppingList">
-                <img id="top-icon" src="img/cart.svg">
-                <input id="top-icon" type="submit" value="View Shopping Cart">
-            </form>
-        </div> -->
-<div id="top-container" class="btn-group btn-group-justified" role="group">
-   <a style="background: #6f6d74" href="" class="btn btn-default" role="button"></a>
+<div id="top-container" style="background: #6f6d74"  class="btn-group btn-group-justified" role="group">
+    <div class="dropdown">
+        <a class="dropdown-toggle top-icon" type="button" data-toggle="dropdown"><img id="top-icon" src="img/user.svg"></a>
+        <ul class="dropdown-menu top-icon">
+            <li><a href="">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <form method="GET" action="/getShoppingList">
+        <img style="padding-top: 1.5%" id="top-icon" src="img/cart.svg">
+    </form>
 </div>
 <div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
