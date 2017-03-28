@@ -1,52 +1,68 @@
-<div style="top:30%; position:fixed; width:100%">
-          <h1 style="text-align: center; margin-bottom: 2%;">Grocery List</h1>
-<!--        <div style="position:relative; left: 10%; margin-bottom: 1%">-->
-          <form style="margin:0 auto; width:75%" method="POST" action="/addItem">
-              <div class="input-group text">
-                <input style="width:50%" name="ItemName" type="text" class="form-control" placeholder="Item Name" required>
-                <input style="width:50%" name="Quantity" type="number" class="form-control" placeholder="Quantity" required>
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="submit" value="Add to list">Add</button>
-                </span>
-              </div>
-          </form>
-<!--        </div>-->
-        <div style="position:relative; left: 10%;">
-             <table class="table">
-                  <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-          <ul>
-            {{#each shoppingList}}
-<!--
-              <table class="table">
-                  <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
--->
-              <tr>
-                    <td>{{this.ItemName}}</td>
-                      <td>{{this.Quantity}}</td>
-              </tr>
-<!--
-               <li>{{this.ItemName }}
+<div class="container">
+<ul style="margin-top: 1%" class="nav nav-tabs">
+        <li style="width:50%; text-align:center" role="button" class="active text"><a style="color: black" data-toggle="tab" href="#byItem">By Item</a></li>
+        <li style="width:50%; text-align:center" class="text" role="button"><a style="color: black" data-toggle="tab" href="#byRecipe">By Recipe</a></li>
+    </ul>
+</div>
 
-                <form method="POST" action="/deleteItem/{{this.ItemName }}">
+<div class="tab-content">
+    <div id="byItem" class="tab-pane active">
+        <h1 style="text-align: center; margin-bottom: 2%;" class="text">Grocery List by Item</h1>
+        <form style="margin:0 auto; width:80%" method="POST" action="/addItem">
+          <div class="input-group text">
+            <input style="width:50%" name="ItemName" type="text" class="form-control" placeholder="Item Name" required>
+            <input style="width:25%" name="Quantity" type="number" class="form-control" placeholder="Quantity" required>
+              <input style="width:25%" name="Unit" type="text" class="form-control" placeholder="Units">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="submit" value="Add to list"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            </span>
+          </div>
+        </form>
+        <form style="position:relative; left: 10%; width:80%" method="post" action="">
+            <div style="margin: 1% auto; text-align:center;margin-top:2%">
+                <button class="btn btn-danger" type="submit" name="delete" value="Delete"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button class="btn btn-primary" type="submit" name="collected" value="Collect"><i class="fa fa-check" aria-hidden="true"></i></button>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="td text"></th>
+                    <th class="td text">Item</th>
+                    <th class="td text">Quantity</th>
+                    <th class="td text">Units</th>
+                    <th class="td text">Collected?</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {{#each shoppingList}}
+                        <tr>
+                            <td name="itemName" value={{this.ItemName}} class="td text"><input type="checkbox"></td>
+                            <td class="td text">{{this.ItemName}}</td>
+                            <td class="td text">{{this.Quantity}}</td>
+                            <td class="td text">{{this.Unit}}</td>
+                            <form method="POST" action="/collectedItem/{{this.ItemName}}">
+                                <td class="td">
+                                    {{#if this.isCollected}}
+                                       <img style="width=50%" src="/img/success.svg">
+                                    {{/if}}
+                                </td>
+                            </form>
+                        </tr>
+                    <!--
+                    <li>{{this.ItemName }}
+
+                    <form method="POST" action="/deleteItem/{{this.ItemName }}">
                     <input type="submit" value="Delete">
-                </form>
-               </li>
--->
-            {{/each}}
-          </ul>
-                      </tbody>
-              </table>
-        </div>
+                    </form>
+                    </li>
+                    -->
+                        {{/each}}
+                    </ul>
+                </tbody>
+            </table>
+        </form>
     </div>
+    <div id="byRecipe" class="tab-pane">
+    </div>
+</div>

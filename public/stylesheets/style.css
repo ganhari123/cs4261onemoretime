@@ -81,11 +81,7 @@ body {
     background: #6f6d74;
 }
 #tabBtnContainer {
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-    height: 15%;
-/*    background: black;*/
+    height: 10%;
 }
 
 #top-icon {
@@ -94,11 +90,9 @@ body {
 }
 
 #top-container {
-/*
+    height:10%;
+    margin: 0 auto;
     position: absolute;
-    width: 100%;
-*/
-    height:8%;
 }
 
 
@@ -158,7 +152,7 @@ body {
 }
 
 .card {
-    background: white;
+    background: #fff3f3;
     padding: 5%;
     border: 1px solid #262527;
     border-radius: 5px;
@@ -170,4 +164,13 @@ body {
 
 .form-margin {
     margin: 5px;
+}
+
+.td {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.trash {
+    display: flex;
 }

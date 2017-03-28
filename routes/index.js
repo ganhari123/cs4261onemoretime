@@ -174,6 +174,28 @@ router.post('/dietPreferences', function(req, res){
 	});
 });
 
+router.post('/collectedItem/:item', function(req, res){
+    console.log(req.params.item);
+	con.query('UPDATE shoppingcart SET isCollected = ? WHERE username = ? AND itemName = ?', [JSON.stringify(req.body), req.user.username, req.params.item], function(err, result){
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect('/getShoppingList');
+		}
+	});
+});
+
+router.post('/deleteItem/:item', function(req, res){
+	console.log(req.params.item);
+	con.query('DELETE FROM shoppingcart WHERE ItemName = ?', req.params.item, function(err, result){
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect('/getShoppingList');
+		}
+	});
+});
+
 function isLoggedIn(req, res, next) {
 	if (req.user) {
 		res.redirect('/searchRecipe');

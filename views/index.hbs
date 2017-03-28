@@ -7,21 +7,57 @@
   <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="https://use.fontawesome.com/f1f0ced12b.js"></script>
 </head>
 
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
-<div id="top-container" style="background: #6f6d74"  class="btn-group btn-group-justified" role="group">
-    <div style="float:right" class="dropdown">
-        <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="img/user.svg"></a>
-        <ul class="dropdown-menu dropdown-menu-right top-icon">
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </div>
-    <form method="GET" action="/getShoppingList">
-        <a href="/getShoppingList"><img style="margin:1%" id="top-icon" src="img/cart.svg"></a>
-    </form>
+<!--
+    <nav style="background-color: #6f6d74" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <object style="margin:1%" data="/img/logo-small.svg"></object>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form method="GET" action="/getShoppingList">
+                            <a href="/getShoppingList"><img style="margin:1%" id="top-icon" src="img/cart.svg"></a>
+                        </form>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="img/user.svg"></a>
+                        <ul class="dropdown-menu dropdown-menu-right top-icon">
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            </div>
+    </nav>
+-->
+            
+<div id="top-container" style="background: #6f6d74"  class="row" role="group">
+    <div>
+        <object style="margin:1%" data="/img/logo-small.svg"></object>
+        <div style="float:right">
+            <form style="display:inline-block; margin-right:7px" method="GET" action="/getShoppingList">
+                <a href="/getShoppingList"><img id="top-icon" src="img/cart.svg"></a>
+            </form>
+            <div style="display:inline-block; margin: auto" class="dropdown">
+                <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="img/user.svg"></a>
+                <ul class="dropdown-menu dropdown-menu-right top-icon">
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
 </div>
 <div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
    <a style="background: #6f6d74" href="/searchRecipe" class="btn btn-default" role="button"><img id="icon" src="img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
