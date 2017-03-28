@@ -103,8 +103,7 @@ router.get('/searchRecipe', isLoggedOut,  function(req, res){
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
-		console.log(returnObject);
-		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject});
+		res.render('recipeSearchForm', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
 	});
 });
 
@@ -112,9 +111,15 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 	unirest.get('http://food2fork.com/api/get?key=125aec03ba4a0ffe5222a72a9783b3b6&rId='.concat(req.params.id))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
-		res.render('recipeView', {layout: 'index', title:'shop&go', recipe: returnObject.recipes});
+		console.log(returnObject.recipe);
+		console.log(returnObject.recipe.ingredients);
+		res.render('recipeView', {layout: 'index', title:'shop&go', username: 'hello', recipe: returnObject.recipe, ingrediantList: returnObject.recipe.ingredients});
 	});
+
+	//res.render('recipeView', {layout: 'index', title:'shop&go', username: req.params.id});
 });
+
+//router.post()
 
 router.get('/getShoppingList', function(req, res){
 	con.query('SELECT * FROM shoppingcart', function(err, rows){
@@ -140,6 +145,8 @@ router.post('/deleteItem/:item', function(req, res){
 		}
 	});
 });
+
+
 
 router.post('/addItem', function(req, res){
 	console.log(req.body);

@@ -7,26 +7,27 @@
   <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/js/searchResults.js"></script>
 
 </head>
 
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
 <div id="top-container" style="background: #6f6d74"  class="btn-group btn-group-justified" role="group">
     <div style="float:right" class="dropdown">
-        <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="img/user.svg"></a>
+        <a class="dropdown-toggle top-icon" data-toggle="dropdown"><img style="margin:15%" id="top-icon" src="/img/user.svg"></a>
         <ul class="dropdown-menu dropdown-menu-right top-icon">
             <li><a href="/profile">Profile</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
     <form method="GET" action="/getShoppingList">
-        <a href="/getShoppingList"><img style="margin:1%" id="top-icon" src="img/cart.svg"></a>
+        <a href="/getShoppingList"><img style="margin:1%" id="top-icon" src="/img/cart.svg"></a>
     </form>
 </div>
 <div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
-   <a style="background: #6f6d74" href="/searchRecipe" class="btn btn-default" role="button"><img id="icon" src="img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
-    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/shop.svg"><br> <p id="tabLabel">Aisle Finder</p></a>
-    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="img/scan.svg"><br> <p id="tabLabel">Scan</p></a>
+   <a style="background: #6f6d74" href="/searchRecipe" class="btn btn-default" role="button"><img id="icon" src="/img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
+    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="/img/shop.svg"><br> <p id="tabLabel">Aisle Finder</p></a>
+    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="/img/scan.svg"><br> <p id="tabLabel">Scan</p></a>
 </div>
     {{{body}}}
 
