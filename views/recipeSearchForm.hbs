@@ -1,3 +1,4 @@
+
 <div>
         <h1 class="pageTitle">Search for Recipes</h1>
         <form style="margin:2% auto; width:75%" method="get" action="/searchRecipe">
@@ -21,7 +22,7 @@
                             </div>
 
                             <div class="media-body">
-                                <a href="#"><h5 class="media-heading text">{{this.title}}</h5></a>
+                                <h5 id="recipeTitle" onclick="getRecipe('{{this.f2f_url}}')" class="media-heading text">{{this.title}}</h5>
                             </div>
                         </div>
                     </div>
@@ -31,23 +32,4 @@
 
 		  {{/each}}
 		</ul>
-<!--
-    <ul style="margin: 0 auto; width: 50%; display: block" class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
--->
 </div>

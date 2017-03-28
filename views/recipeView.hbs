@@ -1,0 +1,14 @@
+ <h1>{{recipe.title}}</h1>
+
+<img id="top-icon" src="{{recipe.image_url}}">
+
+ <p>Look up the original recipe over <a href="{{recipe.source_url}}">here</a></p>
+
+ <h2>Ingredient List</h2>
+<ul>
+{{#each ingrediantList}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+
+<button onclick="$(this).sendIngrediantsToCart()">Add Recipe to Cart</button>

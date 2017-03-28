@@ -107,6 +107,20 @@ router.get('/searchRecipe', isLoggedOut,  function(req, res){
 	});
 });
 
+router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
+	unirest.get('http://food2fork.com/api/get?key=125aec03ba4a0ffe5222a72a9783b3b6&rId='.concat(req.params.id))
+	.end(function(result){
+		var returnObject = JSON.parse(result.body);
+		console.log(returnObject.recipe);
+		console.log(returnObject.recipe.ingredients);
+		res.render('recipeView', {layout: 'index', title:'shop&go', username: 'hello', recipe: returnObject.recipe, ingrediantList: returnObject.recipe.ingredients});
+	});
+
+	//res.render('recipeView', {layout: 'index', title:'shop&go', username: req.params.id});
+});
+
+//router.post()
+
 router.get('/getShoppingList', function(req, res){
 	con.query('SELECT * FROM shoppingcart', function(err, rows){
 		if (err) {
@@ -132,6 +146,8 @@ router.post('/deleteItem/:item', function(req, res){
 	});
 });
 
+
+
 router.post('/addItem', function(req, res){
 	console.log(req.body);
 	con.query('INSERT INTO shoppingcart SET ?', req.body, function(err, result){
@@ -151,12 +167,16 @@ router.get('/profile', isLoggedOut,  function(req, res){
 		} else {
 			var storeAllerg = {layout: 'index', title:'shop&go', username: req.user.username, nut: false, veg: false, lactose: false, vegan: false, celiac: false, other: ''};
 			var rowFromTable = JSON.parse(rows[0].dietrest);
-			var i = 0;
-			for (i = 0; i < rowFromTable.diet.length; i++) {
-				storeAllerg[rowFromTable.diet[i]] = true;
+			if (rowFromTable !== null) {
+				var i = 0;
+				for (i = 0; i < rowFromTable.diet.length; i++) {
+					storeAllerg[rowFromTable.diet[i]] = true;
+				}
+				storeAllerg['other'] = rowFromTable.other;
+				res.render('profile', storeAllerg);
+			} else {
+				res.render('profile', storeAllerg);
 			}
-			storeAllerg['other'] = rowFromTable.other;
-			res.render('profile', storeAllerg);
 		}
 	});
 	
@@ -185,16 +205,6 @@ router.post('/collectedItem/:item', function(req, res){
 	});
 });
 
-router.post('/deleteItem/:item', function(req, res){
-	console.log(req.params.item);
-	con.query('DELETE FROM shoppingcart WHERE ItemName = ?', req.params.item, function(err, result){
-		if (err) {
-			console.log(err);
-		} else {
-			res.redirect('/getShoppingList');
-		}
-	});
-});
 
 function isLoggedIn(req, res, next) {
 	if (req.user) {
