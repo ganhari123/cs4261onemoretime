@@ -22,7 +22,8 @@ var con = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
   user: "b2fcba8e2a2458",
   password: "aceb39dabff4f8c",
-  database: "heroku_486681e5e61db3b"
+  database: "heroku_486681e5e61db3b",
+  multipleStatements: true
 });
 
 require('./passport')(passport, con);
@@ -135,34 +136,35 @@ router.get('/getShoppingList', isLoggedOut, function(req, res){
 });
 
 router.post('/addDeleteItem', function(req, res){
-	console.log(req.body);
 	if (req.body.collected == 'Collect') {
 		var i = 0;
-		console.log(req.body.item);
+		var query = "";
 		for (i = 0; i < req.body.item.length; i++) {
 			console.log(req.body.item[i]);
-			con.query("UPDATE shoppingcart SET isCollected = ? WHERE ItemName = ?", [1, req.body.item[i]], function(err, result){
-				if (err) {
-					console.log(err);
-				} else {
-					console.log('hello i am done');
-					//res.redirect('/getShoppingList');
-				}
-			});
+			query = query.concat("UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '", req.body.item[i], "'; ");
 		}
+		con.query(query, function(err, results){
+			if (err){
+				console.log(err);
+			} else {
+				res.redirect('/getShoppingList');
+			}
+		});
 		
 	} else {
+		var i = 0;
+		var query = "";
 		for (i = 0; i < req.body.item.length; i++) {
 			console.log(req.body.item[i]);
-			con.query('DELETE FROM shoppingcart WHERE ItemName = ?', req.body.item[i], function(err, result){
-				if (err) {
-					console.log(err);
-				} else {
-					console.log('hello i am done');
-					//res.redirect('/getShoppingList');
-				}
-			});
+			query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", req.body.item[i], "'; ");
 		}
+		con.query(query, function(err, results){
+			if (err){
+				console.log(err);
+			} else {
+				res.redirect('/getShoppingList');
+			}
+		});
 	}
 	
 });
