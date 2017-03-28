@@ -121,18 +121,50 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 
 //router.post()
 
-router.get('/getShoppingList', function(req, res){
+router.get('/getShoppingList', isLoggedOut, function(req, res){
 	con.query('SELECT * FROM shoppingcart', function(err, rows){
 		if (err) {
 			res.send(err);
 		} else {
-			console.log(rows);
 			res.render('shoppingKart', {
 				title: 'list',
 				shoppingList: rows
 			});
 		}
 	});
+});
+
+router.post('/addDeleteItem', function(req, res){
+	console.log(req.body);
+	if (req.body.collected == 'Collect') {
+		var i = 0;
+		console.log(req.body.item);
+		for (i = 0; i < req.body.item.length; i++) {
+			console.log(req.body.item[i]);
+			con.query("UPDATE shoppingcart SET isCollected = ? WHERE ItemName = ?", [1, req.body.item[i]], function(err, result){
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('hello i am done');
+					//res.redirect('/getShoppingList');
+				}
+			});
+		}
+		
+	} else {
+		for (i = 0; i < req.body.item.length; i++) {
+			console.log(req.body.item[i]);
+			con.query('DELETE FROM shoppingcart WHERE ItemName = ?', req.body.item[i], function(err, result){
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('hello i am done');
+					//res.redirect('/getShoppingList');
+				}
+			});
+		}
+	}
+	
 });
 
 router.post('/deleteItem/:item', function(req, res){
