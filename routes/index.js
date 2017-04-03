@@ -22,7 +22,8 @@ var con = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
   user: "b2fcba8e2a2458",
   password: "aceb39dabff4f8c",
-  database: "heroku_486681e5e61db3b"
+  database: "heroku_486681e5e61db3b",
+  multipleStatements: true
 });
 
 require('./passport')(passport, con);
@@ -121,18 +122,51 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 
 //router.post()
 
-router.get('/getShoppingList', function(req, res){
+router.get('/getShoppingList', isLoggedOut, function(req, res){
 	con.query('SELECT * FROM shoppingcart', function(err, rows){
 		if (err) {
 			res.send(err);
 		} else {
-			console.log(rows);
 			res.render('shoppingKart', {
 				title: 'list',
 				shoppingList: rows
 			});
 		}
 	});
+});
+
+router.post('/addDeleteItem', function(req, res){
+	if (req.body.collected == 'Collect') {
+		var i = 0;
+		var query = "";
+		for (i = 0; i < req.body.item.length; i++) {
+			console.log(req.body.item[i]);
+			query = query.concat("UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '", req.body.item[i], "'; ");
+		}
+		con.query(query, function(err, results){
+			if (err){
+				console.log(err);
+			} else {
+				res.redirect('/getShoppingList');
+			}
+		});
+		
+	} else {
+		var i = 0;
+		var query = "";
+		for (i = 0; i < req.body.item.length; i++) {
+			console.log(req.body.item[i]);
+			query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", req.body.item[i], "'; ");
+		}
+		con.query(query, function(err, results){
+			if (err){
+				console.log(err);
+			} else {
+				res.redirect('/getShoppingList');
+			}
+		});
+	}
+	
 });
 
 router.post('/deleteItem/:item', function(req, res){
