@@ -100,7 +100,7 @@ router.post('/register', function(req, res){
 
 
 router.get('/searchRecipe', isLoggedOut,  function(req, res){
-
+	console.log(req.user);
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
@@ -123,7 +123,7 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 //router.post()
 
 router.get('/getShoppingList', isLoggedOut, function(req, res){
-	con.query('SELECT * FROM shoppingcart', function(err, rows){
+	con.query('SELECT * FROM shoppingcart WHERE username = ?', req.user.username, function(err, rows){
 		if (err) {
 			res.send(err);
 		} else {
@@ -136,13 +136,20 @@ router.get('/getShoppingList', isLoggedOut, function(req, res){
 });
 
 router.post('/addDeleteItem', function(req, res){
+	console.log(req.body);
 	if (req.body.collected == 'Collect') {
 		var i = 0;
 		var query = "";
-		for (i = 0; i < req.body.item.length; i++) {
-			console.log(req.body.item[i]);
-			query = query.concat("UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '", req.body.item[i], "'; ");
+		if (typeof req.body.item === 'string') {
+			query = "UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '".concat(req.body.item, "'");
+		} else {
+			console.log('in many');
+			for (i = 0; i < req.body.item.length; i++) {
+				console.log(req.body.item[i]);
+				query = query.concat("UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '", req.body.item[i], "'; ");
+			}
 		}
+		console.log(query);
 		con.query(query, function(err, results){
 			if (err){
 				console.log(err);
@@ -154,10 +161,16 @@ router.post('/addDeleteItem', function(req, res){
 	} else {
 		var i = 0;
 		var query = "";
-		for (i = 0; i < req.body.item.length; i++) {
-			console.log(req.body.item[i]);
-			query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", req.body.item[i], "'; ");
+		if (typeof req.body.item === 'string') {
+			query = "DELETE FROM shoppingcart WHERE ItemName = '".concat(req.body.item, "'");
+		} else {
+			console.log('in many');
+			for (i = 0; i < req.body.item.length; i++) {
+				console.log(req.body.item[i]);
+				query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", req.body.item[i], "'; ");
+			}
 		}
+		console.log(query);
 		con.query(query, function(err, results){
 			if (err){
 				console.log(err);
@@ -169,22 +182,11 @@ router.post('/addDeleteItem', function(req, res){
 	
 });
 
-router.post('/deleteItem/:item', function(req, res){
-	console.log(req.params.item);
-	con.query('DELETE FROM shoppingcart WHERE ItemName = ?', req.params.item, function(err, result){
-		if (err) {
-			console.log(err);
-		} else {
-			res.redirect('/getShoppingList');
-		}
-	});
-});
-
-
-
 router.post('/addItem', function(req, res){
 	console.log(req.body);
-	con.query('INSERT INTO shoppingcart SET ?', req.body, function(err, result){
+	var dbBody = req.body;
+	dbBody['username'] = req.user.username;
+	con.query('INSERT INTO shoppingcart SET ?', dbBody, function(err, result){
 		if (err) {
 			console.log(err);
 		} else {
