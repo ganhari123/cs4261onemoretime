@@ -13,10 +13,9 @@
 
 <body id="bodyMain" style="background-color: rgb(255,228,222)">
             
-<div id="top-container" style="background: #6f6d74"  class="row" role="group">
-    <div>
+<nav id="top-container" style="background: #6f6d74"  class="row" role="group">
         <object style="margin:1%" data="/img/logo-small.svg"></object>
-        <div style="float:right">
+        <div style="margin: 3px auto; float:right">
             <form style="display:inline-block; margin-right:7px" method="GET" action="/getShoppingList">
                 <a href="/getShoppingList"><img id="top-icon" src="/img/cart.svg"></a>
             </form>
@@ -28,10 +27,10 @@
                 </ul>
             </div>
         </div>
-</div>
+</nav>
 <div id="tabBtnContainer" class="btn-group btn-group-justified" role="group">
    <a style="background: #6f6d74" href="/searchRecipe" class="btn btn-default" role="button"><img id="icon" src="/img/recipe.svg"><br> <p id="tabLabel">Recipes</p></a>
-    <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="/img/shop.svg"><br> <p id="tabLabel">Aisle Finder</p></a>
+    <a style="background: #6f6d74" href="/aisleFinderSearchStore" class="btn btn-default" role="button"><img id="icon" src="/img/shop.svg"><br> <p id="tabLabel">Aisle Finder</p></a>
     <a style="background: #6f6d74" href="" class="btn btn-default" role="button"><img id="icon" src="/img/scan.svg"><br> <p id="tabLabel">Scan</p></a>
 </div>
     {{{body}}}

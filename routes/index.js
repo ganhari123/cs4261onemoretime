@@ -5,6 +5,8 @@ var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 var unirest = require('unirest');
+var parser = require('xml2json');
+
 
 
 router.use(session({
@@ -237,6 +239,48 @@ router.post('/collectedItem/:item', function(req, res){
 			res.redirect('/getShoppingList');
 		}
 	});
+});
+
+router.get('/aisleFinderSearchStore', isLoggedOut, function(req, res) {
+  res.render('aisleFinderSearchStore', {layout: 'index', title: 'shop&go'});
+});
+
+router.get('/searchForStore', isLoggedOut,  function(req, res){
+    //Sara's API key: 930e39d252
+    console.log(req.query.query);
+    if (!isNaN(req.query.query)) {
+        unirest.get('http://www.SupermarketAPI.com/api.asmx/StoresByZip?APIKEY=930e39d252&ZipCode='.concat(req.query.query))
+        .end(function(result){
+            var json = parser.toJson(result.body);
+            var returnObject = JSON.parse(json);
+           if (isNaN(returnObject.ArrayOfStore.Store.length)) {
+                returnObject = [returnObject.ArrayOfStore.Store];
+                console.log(returnObject);
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+            } else {
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+            }
+	});
+    } else {
+        var split = req.query.query.split(", ");
+        var city = split[0];
+        var state = split[1];
+//        console.log('http://www.SupermarketAPI.com/api.asmx/StoresByCityState?APIKEY=930e39d252&SelectedCity='.concat(city).concat('&SelectedState=').concat(state));
+        unirest.get('http://www.SupermarketAPI.com/api.asmx/StoresByCityState?APIKEY=930e39d252&SelectedCity='.concat(city).concat('&SelectedState=').concat(state))
+        .end(function(result){
+            var json = parser.toJson(result.body);
+            var returnObject = JSON.parse(json);
+            console.log(returnObject.ArrayOfStore.Store);
+            console.log(isNaN(returnObject.ArrayOfStore.Store.length));
+            if (isNaN(returnObject.ArrayOfStore.Store.length)) {
+                returnObject = [returnObject.ArrayOfStore.Store];
+                console.log(returnObject);
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+            } else {
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+            }
+        });
+    }
 });
 
 
