@@ -16,38 +16,19 @@ body {
     background-attachment: fixed;
 }
 #logo {
-/*    display: block;*/
-    position: fixed;
-    margin: auto;
-    top: 25%;
-  	left: 50%;
-    transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
     z-index: 1;
     font-family: 'Pacifico', cursive;
-/*    margin-bottom: 50%;*/
+    margin-bottom: -10px;
+    margin-left: 23px;
 }
 
-#ComingSoon {
-	position: fixed;
-  	top: 50%;
-  	left: 50%;
-  	height: 70px;
-  	width: 300px;
-  	background: radial-gradient(rgba(0, 100, 0, 0.5) 50%, rgba(76,146,76, 0.7) 100%);
-  	font-size: 30px;
-  	text-align: center;
-  	border-radius: 10px;
-  	border: none;
-  	color: white;
-  /* bring your own prefixes */
-  	transform: translate(-50%, -50%);
-}
-
-#ComingSoon:hover {
-	width: 400px;
-	font-size: 40px;
-	height: 90px;
+.logo-container {
+  width: 300px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  position: relative;
 }
 
 #appbar {
@@ -81,7 +62,7 @@ body {
     background: #6f6d74;
 }
 #tabBtnContainer {
-    height: 10%;
+    height: 8%;
 }
 
 #top-icon {
@@ -90,32 +71,27 @@ body {
 }
 
 #top-container {
-    height:10%;
+    min-height:5%;
     margin: 0 auto;
-    position: absolute;
+    position: relative;
 }
 
 
 #logForm {
-	position: fixed;
-  	top: 50%;
-  	left: 50%;
   	background-color: #6f6d74;
-  /* bring your own prefixes */
-  	transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
 	text-align: center;
 	border-radius: 10px;
 	width: 300px;
     box-shadow: 4px 4px 4px 4px #f9caca;
-    margin-top: 5%;
     display: block;
     z-index: 2;
+    margin: 2%;
 }
 
 #text {
     font-family: 'Noto Serif', serif;
     color: #e7e4e6;
+    padding-top: 5%;
     margin-bottom: 5%;
 }
 

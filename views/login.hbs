@@ -1,22 +1,9 @@
-<!-- <head>
-  <title>{{ title }}</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Noto+Serif|Pacifico" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylsheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head> -->
-<!-- <body> -->
-    <form id="logForm" action="/login" method="post" >
-        <h2 id="text" class="form-signin-heading">Login</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="input" class="form-control" name="username" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="input" class="form-control" name="password" placeholder="Password" required>
-        <button id="signinBtn" class="btn btn-lg  btn-block" type="submit" value="Submit">Sign in</button>
-        <a href="/register"><p id="text">Don't have an account? Sign up now!</p></a>
-    </form>
-<!-- </body> -->
+<form id="logForm" action="/login" method="post" >
+    <h2 id="text">Login</h2>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text" id="input" class="form-control text" name="username" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="input" class="form-control text" name="password" placeholder="Password" required>
+    <button id="signinBtn" class="btn btn-lg  btn-block" type="submit" value="Submit">Sign in</button>
+    <a id="text" href="/register"><p style="padding-bottom: 5%">Don't have an account? Sign up now!</p></a>
+</form>

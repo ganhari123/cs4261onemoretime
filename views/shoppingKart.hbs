@@ -11,13 +11,14 @@
         <form style="margin:0 auto; width:80%" method="POST" action="/addItem">
           <div class="input-group text">
             <input style="width:50%" name="ItemName" type="text" class="form-control" placeholder="Item Name" required>
-            <input style="width:25%" name="Quantity" type="number" class="form-control" placeholder="Quantity" required>
+            <input style="width:25%" name="Quantity" type="number" step="0.01" class="form-control" placeholder="Quantity" required>
               <input style="width:25%" name="Unit" type="text" class="form-control" placeholder="Units">
             <span class="input-group-btn">
                 <button class="btn btn-success" type="submit" value="Add to list"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </span>
           </div>
         </form>
+<!--        <form style="position:relative; margin:auto; width:75%" method="post" action="">-->
         <form style="position:relative; left: 10%; width:80%" method="post" action="/addDeleteItem">
             <div style="margin: 1% auto; text-align:center;margin-top:2%">
                 <button class="btn btn-danger" type="submit" name="collected" value="Delete"><i class="fa fa-times" aria-hidden="true"></i></button>

@@ -1,0 +1,35 @@
+
+<div>
+        <h1 class="pageTitle">Aisle Finder</h1>
+        <form style="margin:2% auto; width:80%" method="get" action="/searchForStore">
+            <div class="input-group text">
+                <input type="text" class="form-control" placeholder="Search for Store by City, State or Zipcode" name="query" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" value="Search Store">Search</button>
+                </span>
+            </div>
+        </form>
+        <ul class="recipe_list">
+		  {{#each Store}}
+<!--            console.log({{this}})-->
+<!--		Code adjusted from http://bootsnipp.com/search?q=card&page=2 -->
+            <div class="container card text" onclick="getRecipe('{{this.f2f_url}}')">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card-style">
+                        <div class="media">
+                             <div class="media-left">
+                            </div>
+                            <div class="media-body">
+                                <h5><b>{{this.Storename}}</b></h5>
+                                <p>Address: {{this.Address}}, {{this.City}}, {{this.State}}, {{this.Zip}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		  {{/each}}
+		</ul>
+</div>
