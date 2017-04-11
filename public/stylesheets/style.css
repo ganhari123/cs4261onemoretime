@@ -62,7 +62,8 @@ body {
     background: #6f6d74;
 }
 #tabBtnContainer {
-    height: 8%;
+    height: 8vh;
+    width: 100vw;
 }
 
 #top-icon {
@@ -72,6 +73,7 @@ body {
 
 #top-container {
     min-height:5%;
+    width: 100vw;
     margin: 0 auto;
     position: relative;
 }
@@ -136,6 +138,7 @@ body {
 
 .text {
     font-family: 'Noto Serif', serif;
+    color:  #262527;
 }
 
 .form-margin {
@@ -147,6 +150,18 @@ body {
     vertical-align: middle;
 }
 
-.trash {
-    display: flex;
+.chip {
+    margin-top: 2%;
+    display: inline-block;
+    padding: 0 15px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 25px;
+     border: 1px solid #262527;
+    background-color: #fff3f3;
+}
+
+#recipeView {
+    max-width: 75vw;
 }

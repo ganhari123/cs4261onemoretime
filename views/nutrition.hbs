@@ -1,0 +1,41 @@
+<div>
+        <h1 class="pageTitle">Nutritional Information</h1>
+        <form style="margin:2% auto; width:75%" method="get" action="/getNutritionalInfo">
+            <div class="input-group text">
+                <input type="text" class="form-control" placeholder="Search by Item" name="query" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" value="Get Nutrition">Search</button>
+                </span>
+            </div>
+        </form>
+        <ul class="recipe_list">
+		  {{#each fields}}
+<!--		Code adjusted from http://bootsnipp.com/search?q=card&page=2 -->
+            <div class="container card text">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card-style">
+                        <div class="media">
+                            <div class="media-left">
+<!--                                <img class="media-object img-thumbnail card-img" id="recipePic" src="{{this.image_url}}">-->
+                            </div>
+
+                            <div class="media-body">
+                                <h5 id="recipeTitle" class="media-heading text">{{this.item_name}}</h5>
+<!--                                <p>Serving Size: {{this.nf_serving_size_qty}} {{this.nf_serving_size_unit}}</p>-->
+                                {{#if this.nf_servings_per_container}}
+                                    <p>Serving per Container: {{this.nf_servings_per_container}}</p>
+                                {{else}}
+                                    <p>Serving per Container: 1</p>
+                                {{/if}}
+                                <p>Calories: {{this.nf_calories}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		  {{/each}}
+		</ul>
+</div>

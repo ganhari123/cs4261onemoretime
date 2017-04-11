@@ -19,12 +19,13 @@
           </div>
         </form>
 <!--        <form style="position:relative; margin:auto; width:75%" method="post" action="">-->
-        <form style="position:relative; left: 10%; width:80%" method="post" action="/addDeleteItem">
+        <form style="position:relative; left: 5%; width:80%" method="post" action="/addDeleteItem">
             <div style="margin: 1% auto; text-align:center;margin-top:2%">
                 <button class="btn btn-danger" type="submit" name="collected" value="Delete"><i class="fa fa-times" aria-hidden="true"></i></button>
                 <button class="btn btn-primary" type="submit" name="collected" value="Collect"><i class="fa fa-check" aria-hidden="true"></i></button>
             </div>
-            <table class="table">
+            <div class="table">
+            <table class="table" >
                 <thead>
                 <tr>
                     <th class="td text"></th>
@@ -39,7 +40,7 @@
                         {{#each shoppingList}}
                         <tr>
                             <td name="itemName" value={{this.ItemName}} class="td text"><input name="item" value="{{this.ItemName}}" type="checkbox"></td>
-                            <td class="td text">{{this.ItemName}}</td>
+                            <td class="td text" style="word-wrap: break-word;">{{this.ItemName}}</td>
                             <td class="td text">{{this.Quantity}}</td>
                             <td class="td text">{{this.Unit}}</td>
                                 <td class="td">
@@ -54,8 +55,33 @@
                     </ul>
                 </tbody>
             </table>
+            </div>
         </form>
     </div>
     <div id="byRecipe" class="tab-pane">
+        <ul class="recipe_list">
+		  {{#each shoppingList}}
+<!--		Code adjusted from http://bootsnipp.com/search?q=card&page=2 -->
+<!--            console.log({{this.recipe.title}});-->
+            <div class="container card">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card-style">
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object img-thumbnail card-img" id="recipePic" src="{{this.recipe.image_url}}">
+                            </div>
+
+                            <div class="media-body">
+                                <h5 id="recipeTitle" onclick="getRecipe('{{this.f2f_url}}')" class="media-heading text">{{this.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		  {{/each}}
+		</ul>
     </div>
 </div>

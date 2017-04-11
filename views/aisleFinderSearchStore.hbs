@@ -13,16 +13,46 @@
 		  {{#each Store}}
 <!--            console.log({{this}})-->
 <!--		Code adjusted from http://bootsnipp.com/search?q=card&page=2 -->
-            <div class="container card text" onclick="getRecipe('{{this.f2f_url}}')">
+            <div class="container card text">
+<!--            <div class="container card text">-->
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <div class="card-style">
                         <div class="media">
-                             <div class="media-left">
-                            </div>
                             <div class="media-body">
-                                <h5><b>{{this.Storename}}</b></h5>
+                                <a href="/getStore/{{this.StoreId}}/{{this.Storename}}"><h5><b>{{this.Storename}}</b></h5></a>
                                 <p>Address: {{this.Address}}, {{this.City}}, {{this.State}}, {{this.Zip}}</p>
+                            </div>
+                            <div class="media-right">
+<!--                                <a onclick="getDirections('{{this.Address}}, {{this.City}}, {{this.State}}')"><img style="padding: 15px" src="/img/map.svg"></a>-->
+                                <a data-toggle="modal" data-target="#modal"><img style="padding: 15px" src="/img/map.svg"></a>
+                                <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+                                  <div class="modal-dialog" role="document">
+                                       <form action="/getDirections" method="get">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                          <div class="row">
+                                              <div class="col-lg-6">
+                                                  <label for="origin">Origin:</label>
+                                                <div class="input-group text" id="origin">
+                                                  <input type="text" name="origin" id="origin" class="form-control" id="location" placeholder="Enter City and State, Address, or Zip Code">
+                                                  <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" onclick="getLocation('{{this.Address}}, {{this.City}}, {{this.State}}')"><img src="/img/placeholder.svg"></button>
+                                                  </span>
+                                                </div>
+                                                  <label for="dest" style="margin-top: 2%" >Destination:</label>
+                                                  <input name="dest" id="dest" type="text" class="form-control" value="{{this.Address}}, {{this.City}}, {{this.State}}">
+                                              </div>
+                                            </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" value="Get Directions">Get Directions</button>
+                                      </div>
+                                    </div>
+                                </form>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>

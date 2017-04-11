@@ -1,45 +1,52 @@
 <h1 style="text-align: center; margin-bottom: 2%;" class="text">Welcome {{ username }}!</h1>
 
-<form style="margin:0 auto; width:80%" id="submitDiet" action="/dietPreferences" method="post">
-<!--    <ul class="list-unstyled">-->
-	{{#if nut}}
-<!--        <li>-->
-<!--            <label><input type="checkbox" name="diet" value="nut" checked>Nut allergy</label>-->
-<!--    </li>-->
-    <input type="checkbox" name="diet" value="nut" checked> Nut allergy<br>
-	{{else}}
-<!--        <li>-->
-<!--            <label><input type="checkbox" name="diet" value="nut">Nut allergy</label> <br>-->
-    <input type="checkbox" name="diet" value="nut"> Nut allergy<br>
-<!--    </li>-->
-	{{/if}}
+<div class="container-fluid text">
+    <div class="row align-items-start">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            <form style="margin:0 auto; width:80%" id="submitDiet" action="/dietPreferences" method="post">
+            <!--    <ul class="list-unstyled">-->
+                {{#if nut}}
+            <!--        <li>-->
+            <!--            <label><input type="checkbox" name="diet" value="nut" checked>Nut allergy</label>-->
+            <!--    </li>-->
+                <input type="checkbox" name="diet" value="nut" checked> Nut allergy<br>
+                {{else}}
+            <!--        <li>-->
+            <!--            <label><input type="checkbox" name="diet" value="nut">Nut allergy</label> <br>-->
+                <input type="checkbox" name="diet" value="nut"> Nut allergy<br>
+            <!--    </li>-->
+                {{/if}}
 
-	{{#if veg}}
-	    <input type="checkbox" name="diet" value="veg" checked> Vegetarian<br>
-	{{else}}
-	    <input type="checkbox" name="diet" value="veg" > Vegetarian<br>
-	{{/if}}
+                {{#if veg}}
+                    <input type="checkbox" name="diet" value="veg" checked> Vegetarian<br>
+                {{else}}
+                    <input type="checkbox" name="diet" value="veg" > Vegetarian<br>
+                {{/if}}
 
-	{{#if lactose}}
-	    <input type="checkbox" name="diet" value="lactose" checked> Lactose Intolerant<br>
-	{{else}}
-	    <input type="checkbox" name="diet" value="lactose"> Lactose Intolerant<br>
-	{{/if}}
+                {{#if lactose}}
+                    <input type="checkbox" name="diet" value="lactose" checked> Lactose Intolerant<br>
+                {{else}}
+                    <input type="checkbox" name="diet" value="lactose"> Lactose Intolerant<br>
+                {{/if}}
 
-	{{#if vegan}}
-	    <input type="checkbox" name="diet" value="vegan" checked> Vegan <br>
-	{{else}}
-	    <input type="checkbox" name="diet" value="vegan"> Vegan <br>
-	{{/if}}
+                {{#if vegan}}
+                    <input type="checkbox" name="diet" value="vegan" checked> Vegan <br>
+                {{else}}
+                    <input type="checkbox" name="diet" value="vegan"> Vegan <br>
+                {{/if}}
 
-	{{#if celiac}}
-	    <input type="checkbox" name="diet" value="celiac" checked> Gluten allergy <br>
-	{{else}}
-	    <input type="checkbox" name="diet" value="celiac"> Gluten allergy <br>
-	{{/if}}
+                {{#if celiac}}
+                    <input type="checkbox" name="diet" value="celiac" checked> Gluten allergy <br>
+                {{else}}
+                    <input type="checkbox" name="diet" value="celiac"> Gluten allergy <br>
+                {{/if}}
 
 
-  <input type="text" name="other" placeholder="other" value="{{other}}">
-  <input type="submit" value="Save">
-    </ul>
-</form>
+              <input type="text" name="other" placeholder="other" value="{{other}}">
+              <input type="submit" value="Save">
+<!--                </ul>-->
+            </form>
+        </div>
+    </div>
+</div>

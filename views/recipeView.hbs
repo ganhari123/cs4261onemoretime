@@ -1,14 +1,33 @@
- <h1>{{recipe.title}}</h1>
-
-<img id="top-icon" src="{{recipe.image_url}}">
-
- <p>Look up the original recipe over <a href="{{recipe.source_url}}">here</a></p>
-
- <h2>Ingredient List</h2>
-<ul>
-{{#each ingrediantList}}
-    <li>{{this}}</li>
-{{/each}}
-</ul>
-
-<button onclick="$(this).sendIngrediantsToCart()">Add Recipe to Cart</button>
+ <h1 class="pageTitle">{{recipe.title}}</h1>
+<div class="container text">
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-6">
+            <img id="recipeView" src="{{recipe.image_url}}">
+        </div>
+    </div>
+    <div class="row" style="text-align:center">
+        <p>Look up the original recipe over <a href="{{recipe.source_url}}">here</a></p>
+    </div>
+    <div class="row" style="text-align:center">
+        <h3>Ingredient List</h3>
+    </div>
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <ul>
+                {{#each ingrediantList}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <form style="margin:2% auto; width:75%" method="get" action="/addRecipetoCart">
+            <button class="btn btn-lg  btn-block" style="display:block; margin: auto" name="query" value="{{recipe}}" type="submit">Add Recipe to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -114,8 +114,8 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 	unirest.get('http://food2fork.com/api/get?key=125aec03ba4a0ffe5222a72a9783b3b6&rId='.concat(req.params.id))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
-		console.log(returnObject.recipe);
-		console.log(returnObject.recipe.ingredients);
+//		console.log(returnObject.recipe);
+//		console.log(returnObject.recipe.ingredients);
 		res.render('recipeView', {layout: 'index', title:'shop&go', username: 'hello', recipe: returnObject.recipe, ingrediantList: returnObject.recipe.ingredients});
 	});
 
@@ -124,8 +124,33 @@ router.get('/getRecipeDetails/:id', isLoggedOut, function(req, res){
 
 //router.post()
 
+router.get('/addRecipetoCart', isLoggedOut, function(req, res) {
+    console.log(typeof req.query.query);
+    console.log(req.user.username);
+    con.query('INSERT INTO recipe (recipe, username) VALUES (?, ?)', [req.query.query, req.user.username], function(err, result){
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect('/getShoppingList');
+		}
+	});
+});
+
 router.get('/getShoppingList', isLoggedOut, function(req, res){
-	con.query('SELECT * FROM shoppingcart', function(err, rows){
+//    con.query('SELECT * FROM shoppingcart INNER JOIN recipe ON shoppingcart.username=recipe.username WHERE shoppingcart.username = ?', req.user.username, function(err, rows){
+//        console.log(rows);
+//		if (err) {
+//			res.send(err);
+//		} else {
+//            console.log(rows.title);
+//			res.render('shoppingKart', {
+//				title: 'list',
+//				shoppingList: rows
+//			});
+//		}
+//	});
+	con.query('SELECT * FROM shoppingcart WHERE username = ?', req.user.username, function(err, rows){
+        console.log(rows);
 		if (err) {
 			res.send(err);
 		} else {
@@ -137,6 +162,20 @@ router.get('/getShoppingList', isLoggedOut, function(req, res){
 	});
 });
 
+router.get('/getCartRecipes', isLoggedOut, function(req, res) {
+    console.log("HERE");
+    con.query('SELECT * FROM recipe WHERE username = ?', req.user.username, function(err, rows){
+		if (err) {
+			res.send(err);
+		} else {
+            console.log(rows);
+			res.render('shoppingKart', {
+				title: 'list',
+				shoppingList: rows
+			});
+		}
+	});
+})
 router.post('/addDeleteItem', function(req, res){
 	if (req.body.collected == 'Collect') {
 		var i = 0;
@@ -253,36 +292,122 @@ router.get('/searchForStore', isLoggedOut,  function(req, res){
         .end(function(result){
             var json = parser.toJson(result.body);
             var returnObject = JSON.parse(json);
-           if (isNaN(returnObject.ArrayOfStore.Store.length)) {
-                returnObject = [returnObject.ArrayOfStore.Store];
-                console.log(returnObject);
-                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+            if (returnObject.ArrayOfStore.Store != null) {
+               if (isNaN(returnObject.ArrayOfStore.Store.length)) {
+                    returnObject = [returnObject.ArrayOfStore.Store];
+                    console.log(returnObject);
+                    res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+                } else {
+                    res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+                }
             } else {
-                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: null});
             }
 	});
     } else {
         var split = req.query.query.split(", ");
         var city = split[0];
         var state = split[1];
-//        console.log('http://www.SupermarketAPI.com/api.asmx/StoresByCityState?APIKEY=930e39d252&SelectedCity='.concat(city).concat('&SelectedState=').concat(state));
         unirest.get('http://www.SupermarketAPI.com/api.asmx/StoresByCityState?APIKEY=930e39d252&SelectedCity='.concat(city).concat('&SelectedState=').concat(state))
         .end(function(result){
             var json = parser.toJson(result.body);
             var returnObject = JSON.parse(json);
-            console.log(returnObject.ArrayOfStore.Store);
-            console.log(isNaN(returnObject.ArrayOfStore.Store.length));
-            if (isNaN(returnObject.ArrayOfStore.Store.length)) {
-                returnObject = [returnObject.ArrayOfStore.Store];
-                console.log(returnObject);
-                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+//            console.log(returnObject.ArrayOfStore.Store);
+//            console.log(isNaN(returnObject.ArrayOfStore.Store.length));
+            if (returnObject.ArrayOfStore.Store != null) {
+                if (isNaN(returnObject.ArrayOfStore.Store.length)) {
+                    returnObject = [returnObject.ArrayOfStore.Store];
+                    console.log(returnObject);
+                    res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject});
+                } else {
+                    res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+                }
             } else {
-                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: returnObject.ArrayOfStore.Store});
+                res.render('aisleFinderSearchStore', {layout: 'index', title:'shop&go', Store: null});
             }
         });
     }
 });
 
+router.get('/getDirections', function(req, res) {
+    var origin = req.query.origin.split(' ').join('+');
+    var dest = req.query.dest.split(' ').join('+');
+    var returnObject = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDLCwy7f4hNJsUCTZLi4z2O5hx685KgONQ&origin="+ origin + "&destination=" + dest;
+    console.log(returnObject);
+   res.render('map', {layout: 'index', title: 'shop&go', src: returnObject}); 
+});
+
+router.get('/getLocation/:destination', function(req, res) {
+    unirest.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDLCwy7f4hNJsUCTZLi4z2O5hx685KgONQ')
+    .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+    .send({"considerIp": "true"})
+    .end(function(result) {
+        var location = result.body.location.lat + "," + result.body.location.lng;
+        var returnObject = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDLCwy7f4hNJsUCTZLi4z2O5hx685KgONQ&origin="+ location + "&destination=" + req.params.destination;
+        console.log(returnObject);
+        res.render('map', {layout: 'index', title: 'shop&go', src: returnObject}); 
+    });
+});
+
+router.get('/getStore/:storeID/:storename', function(req, res) {
+   res.render('aisleFinderSearchItem', {layout: 'index', title:'shop&go', storeID: req.params.storeID, storename: req.params.storename});
+});
+router.get('/searchForItem/:storeID/:storename', function(req, res) {
+    unirest.get("http://www.SupermarketAPI.com/api.asmx/SearchForItem?APIKEY=930e39d252&StoreId=".concat(req.params.storeID).concat("&ItemName=").concat(req.query.query))
+        .end(function(result){
+            var json = parser.toJson(result.body);
+            var returnObject = JSON.parse(json);
+//            console.log(returnObject.ArrayOfStore.Store);
+//            console.log(isNaN(returnObject.ArrayOfStore.Store.length));
+            if (returnObject.ArrayOfProduct.Product != null) {
+                if (isNaN(returnObject.ArrayOfProduct.Product.length)) {
+                    returnObject = [returnObject.ArrayOfProduct.Product];
+                    console.log(returnObject);
+                    res.render('aisleFinderSearchItem', {layout: 'index', title:'shop&go', item: returnObject, storeID: req.params.storeID, storename: req.params.storename});
+                } else {
+                    res.render('aisleFinderSearchItem', {layout: 'index', title:'shop&go', item: returnObject.ArrayOfProduct.Product, storeID: req.params.storeID, storename: req.params.storename});
+                }
+            } else {
+                res.render('aisleFinderSearchItem', {layout: 'index', title:'shop&go', item: null, storeID: req.params.storeID, storename: req.params.storename});
+            }
+        });
+});
+
+router.get('/nutrition', function(req, res) {
+    res.render('nutrition', {layout: 'index', title:'shop&go'});
+});
+
+router.get('/getNutritionalInfo', function(req, res) {
+    //app ID: f8bc10a1
+    //App key: 53faf70a55610e2eacf09ee25b80195f
+//    console.log(req.query);
+    unirest.post('https://api.nutritionix.com/v1_1/search')
+    .headers({'Content-Type': 'application/json'})
+    .send({
+        "appId":"f8bc10a1",
+        "appKey":"53faf70a55610e2eacf09ee25b80195f",
+        "query": req.query.query,
+        "fields":["brand_name", "item_name", "nf_calories", "nf_calories_from_fat",
+                 "nf_total_fat", "nf_saturated_fat", "nf_monounsaturated_fat", "nf_trans_fatty_acid", "nf_cholesterol", "nf_sodium", "nf_total_carbohydrate", "nf_dietary_fiber", "nf_sugars", "nf_protein", "nf_servings_per_container", "nf_serving_size_qty", "nf_serving_size_unit"],
+        "filters": {
+           "nf_calories": {
+              "from": 0,
+              "to": 500000
+            }
+        }
+    })
+    .end(function(result) {
+        console.log(result.body.hits[0].fields);
+        console.log(result.body.hits.length)
+        var returnObject = [result.body.hits[0].fields];
+        for (i = 1; i < result.body.hits.length; i++) {
+            returnObject = returnObject.concat([result.body.hits[i].fields]);
+        }
+//        console.log(JSON.stringify(returnObject));
+        res.render('nutrition', {layout: 'index', title:'shop&go', fields: returnObject});
+        
+    });
+});
 
 function isLoggedIn(req, res, next) {
 	if (req.user) {
