@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require("mysql");
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://shopandgo-1478981969236.firebaseio.com"
+});
 
 
 // First you need to create a connection to the db
@@ -44,7 +52,12 @@ router.get('/login', function(req, res, next) {
                 } else if (rows[0].password !== req.query.password) {
                     res.send('either username or password is wrong');
                 } else {
-                	res.send('login successful');
+                  admin.auth().createCustomToken(req.query.username).then(function(customToken) {
+                    // Send token back to client
+                    res.send(customToken);
+                  }).catch(function(error) {
+                    console.log("Error creating custom token:", error);
+                  });
                 }
                 
             }
