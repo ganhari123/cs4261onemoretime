@@ -65,8 +65,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/searchRecipe', function(req, res){
-	console.log(req.user);
-	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.query))
+	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.recipe))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
 		res.send(result.body);
