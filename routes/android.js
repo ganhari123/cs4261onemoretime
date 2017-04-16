@@ -68,6 +68,7 @@ router.get('/searchRecipe', function(req, res){
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.recipe))
 	.end(function(result){
 		var returnObject = JSON.parse(result.body);
+    console.log(result.body);
 		res.send(result.body);
 	});
 });
