@@ -64,6 +64,19 @@ router.get('/login', function(req, res, next) {
         });
 });
 
+router.get('/profile', isLoggedOut,  function(req, res){
+  
+  con.query('SELECT * FROM users where username = ?', req.user.username, function(err, rows){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(rows);
+      res.send(rows);
+    }
+  });
+  
+});
+
 router.get('/searchRecipe', function(req, res){
   console.log('IN SEARCH ROUTE');
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.recipe))
