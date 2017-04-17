@@ -64,7 +64,7 @@ router.get('/login', function(req, res, next) {
         });
 });
 
-router.get('/profile', isLoggedOut,  function(req, res){
+router.get('/profile', function(req, res){
   
   con.query('SELECT * FROM users where username = ?', req.user.username, function(err, rows){
     if (err) {
