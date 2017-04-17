@@ -66,7 +66,7 @@ router.get('/login', function(req, res, next) {
 
 router.get('/profile', function(req, res){
   
-  con.query('SELECT * FROM users where username = ?', req.user.username, function(err, rows){
+  con.query('SELECT * FROM users where username = ?', req.query.username, function(err, rows){
     if (err) {
       console.log(err);
     } else {
