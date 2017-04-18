@@ -110,9 +110,7 @@ router.get('/getShoppingCart', function(req, res) {
 
 router.post('/addToShoppingCart', function(req, res){
     console.log(req.body);
-    var dbBody = req.body;
-    dbBody['username'] = req.user.username;
-    con.query('INSERT INTO shoppingcart SET ?', dbBody, function(err, result){
+    con.query('INSERT INTO shoppingcart SET ?', req.body, function(err, result){
       if (err) {
         console.log(err);
       } else {
