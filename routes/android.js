@@ -98,4 +98,14 @@ router.get('/searchRecipe', function(req, res){
 	});
 });
 
+router.get('/getShoppingCart', function(req, res) {
+  con.query('SELECT * FROM shoppingcart WHERE username = ?', req.query.username, function(err, rows){
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(rows);
+    }
+  });
+});
+
 module.exports = router;
