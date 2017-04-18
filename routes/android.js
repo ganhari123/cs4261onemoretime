@@ -77,6 +77,16 @@ router.get('/profile', function(req, res){
   
 });
 
+router.post('/updateProfile', function(req, res)) {
+  con.query('UPDATE users SET dietrest = ? Where username = ?', [req.body.profile, req.body.username], function(err, result){
+    if (err) {
+      console.log('err');
+    } else {
+      res.send('update success');
+    }
+  });
+}
+
 router.get('/searchRecipe', function(req, res){
   console.log('IN SEARCH ROUTE');
 	unirest.get('http://food2fork.com/api/search?key=125aec03ba4a0ffe5222a72a9783b3b6&q='.concat(req.query.recipe))
