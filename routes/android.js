@@ -77,7 +77,7 @@ router.get('/profile', function(req, res){
   
 });
 
-router.post('/updateProfile', function(req, res)) {
+router.post('/updateProfile', function(req, res) {
   con.query('UPDATE users SET dietrest = ? Where username = ?', [req.body.profile, req.body.username], function(err, result){
     if (err) {
       console.log('err');
@@ -85,7 +85,7 @@ router.post('/updateProfile', function(req, res)) {
       res.send('update success');
     }
   });
-}
+});
 
 router.get('/searchRecipe', function(req, res){
   console.log('IN SEARCH ROUTE');
