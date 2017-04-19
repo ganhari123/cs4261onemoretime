@@ -126,7 +126,7 @@ router.post('/deleteItems', function(req, res){
     console.log('in many');
     var itemsList = JSON.parse(req.body.item);
       for (i = 0; i < itemList.length; i++) {
-        console.log(req.body.item[i]);
+        console.log(itemList);
         query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", itemList[i], "'; ");
 
       }
