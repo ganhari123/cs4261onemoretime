@@ -3,6 +3,13 @@ var router = express.Router();
 var mysql = require("mysql");
 var admin = require("firebase-admin");
 
+var NutritionixClient = require('nutritionix');
+var nutritionix = new NutritionixClient({
+    appId: '115f541b',
+    appKey: '7aea0b380f1eedb023603cfa30de146f'
+    // debug: true, // defaults to false 
+});
+
 var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
@@ -160,6 +167,20 @@ router.post('/checkItems', function(req, res){
         res.send('update successfull');
       }
     });
+});
+
+router.get('/getNutritionInfo', function(req, res){
+    nutritionix.search.standard({
+    q:'salad',
+    // use these for paging 
+    limit: 10,
+    offset: 0,
+    // controls the basic nutrient returned in search 
+    search_nutrient: 'calories'
+  }).then(function(result){
+    console.log(result);
+  }, errorHandler)
+    .catch(uncaughtExceptionHandler);
 });
 
 module.exports = router;

@@ -19,6 +19,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "mysql": "^2.13.0",
+    "nutritionix": "^0.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
