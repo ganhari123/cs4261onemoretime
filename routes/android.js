@@ -123,7 +123,7 @@ router.post('/deleteItems', function(req, res){
   console.log(req.body);
     var i = 0;
     var query = "";
-    console.log('in many');
+    console.log(req.body.item);
     var itemsList = JSON.parse(req.body.item);
     console.log(itemList);
       for (i = 0; i < itemList.length; i++) {
