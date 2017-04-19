@@ -175,7 +175,8 @@ router.get('/getCartRecipes', isLoggedOut, function(req, res) {
 			});
 		}
 	});
-})
+});
+
 router.post('/addDeleteItem', function(req, res){
 	console.log(req.body);
 	if (req.body.collected == 'Collect') {
