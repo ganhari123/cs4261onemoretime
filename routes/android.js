@@ -141,4 +141,25 @@ router.post('/deleteItems', function(req, res){
   
 });
 
+router.post('/checkItems', function(req, res){
+    console.log(req.body);
+    var i = 0;
+    var query = "";
+    console.log(req.body.item);
+    var itemsList = JSON.parse(req.body.item);
+    console.log(itemsList);
+    for (i = 0; i < itemsList.length; i++) {
+      console.log(req.body.item[i]);
+      query = query.concat("UPDATE shoppingcart SET isCollected = 1 WHERE ItemName = '", itemsList[i], "'; ");
+    }
+    console.log(query);
+    con.query(query, function(err, results){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('update successfull');
+      }
+    });
+});
+
 module.exports = router;
