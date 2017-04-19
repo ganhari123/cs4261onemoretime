@@ -123,16 +123,13 @@ router.post('/deleteItems', function(req, res){
   console.log(req.body);
     var i = 0;
     var query = "";
-    if (typeof req.body.item === 'string') {
-      query = "DELETE FROM shoppingcart WHERE ItemName = '".concat(req.body.item, "'");
-    } else {
-      console.log('in many');
-      for (i = 0; i < req.body.item.length; i++) {
+    console.log('in many');
+    var itemsList = JSON.parse(req.body.item);
+      for (i = 0; i < itemList.length; i++) {
         console.log(req.body.item[i]);
-        query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", req.body.item[i], "'; ");
+        query = query.concat("DELETE FROM shoppingcart WHERE ItemName = '", itemList[i], "'; ");
 
       }
-    }
     res.send(query);
     // console.log(query);
     // con.query(query, function(err, results){
