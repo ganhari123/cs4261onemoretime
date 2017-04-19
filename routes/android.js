@@ -124,7 +124,7 @@ router.post('/deleteItems', function(req, res){
     var i = 0;
     var query = "";
     console.log(req.body.item);
-    var itemsList = req.body.item;
+    var itemsList = JSON.parse(req.body.item);
     console.log(itemsList);
       for (i = 0; i < itemsList.length; i++) {
         console.log(itemsList);
