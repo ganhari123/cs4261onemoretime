@@ -169,18 +169,4 @@ router.post('/checkItems', function(req, res){
     });
 });
 
-router.get('/getNutritionInfo', function(req, res){
-    nutritionix.search.standard({
-    q:'salad',
-    // use these for paging 
-    limit: 10,
-    offset: 0,
-    // controls the basic nutrient returned in search 
-    search_nutrient: 'calories'
-  }).then(function(result){
-    console.log(result);
-  }, errorHandler)
-    .catch(uncaughtExceptionHandler);
-});
-
 module.exports = router;
